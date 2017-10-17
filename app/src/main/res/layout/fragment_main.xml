@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
+
+
+    <EditText
+        android:id="@+id/url_text"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:hint="@string/fill_in_text"
+        android:layout_gravity="center" />
+
+
+    <Button
+        android:id="@+id/button_url"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/button_url_text" />
+
+
+    <Button
+        android:id="@+id/button_contacts"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/button_contacts_text" />
+
+    <Button
+        android:id="@+id/button_dialer"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/button_dialer_text" />
+
+    <Button
+        android:id="@+id/button_google"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/button_google_text" />
+
+    <Button
+        android:id="@+id/button_command"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/button_command_text" />
+
+    <TextView
+        android:id="@+id/txt_result"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/text_result_height"
+        android:gravity="center"/>
+
+    <ImageButton
+        android:id="@+id/button_speak"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:background="@null"
+        android:src="@drawable/ic_mic" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/activity_vertical_smaller_margin"
+        android:text="@string/tap_on_mic" />
+
+</LinearLayout>
