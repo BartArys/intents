@@ -18,4 +18,5 @@
     <string name="no_webbrowser">You have no webbrowser installed, please install a webbrowser such as Chrome, Safari, …</string>
     <string name="no_support">No application found to handle this request</string>
     <string name="tap_on_mic">Tap on mic to speak</string>
+    <string name="url">The url is not valid</string>
 </resources>
