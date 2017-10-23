@@ -1,7 +1,9 @@
-package com.example.eothein.intentexample;
+package com.example.eothein.intentexample.fragments;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.speech.RecognizerIntent;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.example.eothein.intentexample.R;
 
 import java.util.List;
 import java.util.Locale;
@@ -104,11 +107,46 @@ public class MainActivityFragment extends Fragment {
         mAwesomeValidation.addValidation(getActivity(),R.id.url_text, Patterns.WEB_URL,R.string.url);
     }
 
+
+
+    private void checkForCompatability(Intent intent){
+        //Check whether an acitivty exists to start with the provided intent
+        PackageManager manager = getActivity().getPackageManager();
+        ComponentName name = intent.resolveActivity(manager);
+        if(name == null){
+            Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getActivity().getPackageName()));
+            if(marketIntent.resolveActivity(manager)!= null){
+                startActivity(marketIntent);
+            }else{
+                Toast t = Toast.makeText(getActivity(),"Could not find the market activity",Toast.LENGTH_LONG);
+                t.show();
+            }
+        }else{
+            startActivity ( intent ) ;
+        }
+    }
+
+
+    private void checkForCompatabilityResult(Intent intent, int requestCode){
+        //Check whether an acitivty exists to start with the provided intent
+        PackageManager manager = getActivity().getPackageManager();
+        ComponentName name = intent.resolveActivity(manager);
+        if(name == null){
+            Intent marketIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getActivity().getPackageName()));
+            if(marketIntent.resolveActivity(manager)!= null){
+                startActivity(marketIntent);
+            }else{
+                Toast.makeText(getActivity(),"Could not find the market activity",Toast.LENGTH_LONG);
+            }
+        }else{
+            startActivityForResult ( intent,requestCode );
+        }
+    }
     /**********************************************************************************
      * METHOD ASSOCIATED WITH THE BUTTONS
      * ********************************************************************************
      */
-    
+
     /**
      *
      * Opens the contact app from the phone
@@ -116,7 +154,7 @@ public class MainActivityFragment extends Fragment {
     @OnClick(R.id.button_contacts)
     public void startContact(){
         Intent intent= new Intent(Intent.ACTION_PICK,  ContactsContract.Contacts.CONTENT_URI);
-        startActivityForResult(intent, PICK_CONTACT);
+        checkForCompatabilityResult(intent, PICK_CONTACT);
     }
 
     /**
@@ -126,7 +164,7 @@ public class MainActivityFragment extends Fragment {
     public void startDialer(){
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:0123456789"));
-        startActivityForResult(intent, PICK_NUMBER);
+        checkForCompatabilityResult(intent, PICK_NUMBER);
     }
 
 
@@ -139,7 +177,7 @@ public class MainActivityFragment extends Fragment {
        if(mAwesomeValidation.validate()){
            Uri uri = Uri.parse(urlText.getText().toString());
            Intent myIntent = new Intent(Intent.ACTION_VIEW, uri);
-           startActivity(myIntent);
+           checkForCompatability(myIntent);
        }
 
     }
@@ -150,7 +188,7 @@ public class MainActivityFragment extends Fragment {
     @OnClick(R.id.button_google)
     public void goToGoogleSearch() {
         Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-        startActivity(intent);
+        checkForCompatability(intent);
     }
 
     /**
@@ -169,7 +207,7 @@ public class MainActivityFragment extends Fragment {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH); // takes user’s speech input and returns it
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM); // Considers input in free form English
-        startActivityForResult(intent, SPEECH_INPUT);
+        checkForCompatabilityResult(intent, SPEECH_INPUT);
     }
 
 
