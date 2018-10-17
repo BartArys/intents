@@ -1,5 +1,7 @@
 package com.example.eothein.intentexample.activities
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
@@ -16,6 +18,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
+    }
+
+    companion object {
+
+        /**
+         * Generates an intent to create a [FullscreenActivity]
+         */
+        fun newFullScreenIntent(context: Context): Intent {
+            val intent = Intent(context, FullscreenActivity::class.java)
+            return intent
+        }
     }
 
 }

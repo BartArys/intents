@@ -32,6 +32,13 @@
         android:text="@string/button_contacts_text" />
 
     <Button
+        android:id="@+id/button_activity"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/open_activity" />
+
+    <Button
         android:id="@+id/button_dialer"
         android:layout_width="@dimen/button_width"
         android:layout_height="wrap_content"
