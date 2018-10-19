@@ -3,25 +3,22 @@ package com.example.eothein.intentexample.fragments
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.provider.ContactsContract
 import android.speech.RecognizerIntent
 import android.support.v4.app.Fragment
-import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-
 import com.basgeekball.awesomevalidation.AwesomeValidation
-import com.example.eothein.intentexample.R
-import java.util.Locale
-
 import com.basgeekball.awesomevalidation.ValidationStyle.UNDERLABEL
-import com.example.eothein.intentexample.activities.MainActivity
-
+import com.example.eothein.intentexample.R
+import com.example.eothein.intentexample.activities.OtherActivity
 import kotlinx.android.synthetic.main.fragment_main.*
+import java.util.*
 
 
 /**
@@ -38,15 +35,10 @@ class MainActivityFragment : Fragment() {
 
     /**
      * Creates the view. See the Fragment Life Cycle.
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
      */
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_main, container, false)
-        return v
+        return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
     /**
@@ -85,11 +77,10 @@ class MainActivityFragment : Fragment() {
             startSpeech()
         }
 
-        button_activity.setOnClickListener{
-            val intent = MainActivity.newFullScreenIntent(activity!!.applicationContext)
+        button_activity.setOnClickListener {
+            val intent = OtherActivity.otherActivityIntent(context!!)
             startActivity(intent)
         }
-
 
     }
 
@@ -107,7 +98,6 @@ class MainActivityFragment : Fragment() {
 
     /**
      * Is called when the underlying Activity has been created.
-     * @param savedInstanceState
      */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -118,8 +108,8 @@ class MainActivityFragment : Fragment() {
 
 
     /**
-     * Checks whether there is an application available to handle the intent. If not, it will
-     * start the Google Play market place to see whether an application exists which can be installed.
+     * Checks whether there is an application available to handle the intent.
+     * If not, it will start the Google Play market place to see whether an application exists which can be installed.
      * If there is an app available, it will start the Activity of that app.
      */
     private fun checkForCompatibility(intent: Intent, requestCode: Int? = null) {
@@ -131,7 +121,7 @@ class MainActivityFragment : Fragment() {
             if (marketIntent.resolveActivity(manager) != null) {
                 startActivity(marketIntent)
             } else {
-                val t = Toast.makeText(activity, "Could not find the market activity", Toast.LENGTH_LONG)
+                val t = Toast.makeText(activity, R.string.no_support, Toast.LENGTH_LONG)
                 t.show()
             }
         } else {
@@ -156,20 +146,17 @@ class MainActivityFragment : Fragment() {
 
     /**
      * Listening to results provided by other activities.
-     * @param requestCode
-     * @param resultCode
-     * @param data
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 PICK_CONTACT -> {
-                    Log.i(this.javaClass.getName(), "Received Contact")
+                    Log.i(this.javaClass.name, "Received Contact")
                     Toast.makeText(activity, "Received Contact", Toast.LENGTH_LONG).show()
                 }
                 PICK_NUMBER -> {
-                    Log.i(this.javaClass.getName(), "Received Number")
+                    Log.i(this.javaClass.name, "Received Number")
                     Toast.makeText(activity, "Received number", Toast.LENGTH_LONG).show()
                 }
                 SPEECH_INPUT -> {
@@ -185,8 +172,8 @@ class MainActivityFragment : Fragment() {
         /**
          * Id's for the activities which return results
          */
-        private val PICK_CONTACT = 1
-        private val PICK_NUMBER = 2
-        private val SPEECH_INPUT = 3
+        private const val PICK_CONTACT = 1
+        private const val PICK_NUMBER = 2
+        private const val SPEECH_INPUT = 3
     }
 }
