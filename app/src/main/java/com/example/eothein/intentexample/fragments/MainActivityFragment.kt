@@ -19,7 +19,6 @@ import com.example.eothein.intentexample.R
 import java.util.Locale
 
 import com.basgeekball.awesomevalidation.ValidationStyle.UNDERLABEL
-import com.example.eothein.intentexample.activities.FullscreenActivity
 import com.example.eothein.intentexample.activities.MainActivity
 
 import kotlinx.android.synthetic.main.fragment_main.*

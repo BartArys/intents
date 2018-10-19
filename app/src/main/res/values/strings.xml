@@ -20,11 +20,6 @@
     <string name="tap_on_mic">Tap on mic to speak</string>
     <string name="url">The url is not valid</string>
 
-    <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="open_activity">Open a new activity</string>
-    <string name="a_nice_image">A nice, funny image</string>
-    <string name="show_full_screen">Show full screen</string>
-    <string name="a_funny_image">A funny image</string>
+    <string name="other_memeDescription">How I feel when I leave work knowing I did nothing the whole day.</string>
 </resources>
