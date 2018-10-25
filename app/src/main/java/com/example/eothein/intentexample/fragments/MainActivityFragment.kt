@@ -30,8 +30,7 @@ class MainActivityFragment : Fragment() {
     /**
      * Validator for the EditText (https://github.com/thyrlian/AwesomeValidation)
      */
-    private var mAwesomeValidation: AwesomeValidation? = null
-
+    private lateinit var mAwesomeValidation: AwesomeValidation
 
     /**
      * Creates the view. See the Fragment Life Cycle.
@@ -61,7 +60,7 @@ class MainActivityFragment : Fragment() {
 
         button_url.setOnClickListener {
             //Test whether the inserted text is an URL
-            if (mAwesomeValidation!!.validate()) {
+            if (mAwesomeValidation.validate()) {
                 val uri = Uri.parse(url_text.text.toString())
                 val myIntent = Intent(Intent.ACTION_VIEW, uri)
                 checkForCompatibility(myIntent)
@@ -102,8 +101,8 @@ class MainActivityFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         mAwesomeValidation = AwesomeValidation(UNDERLABEL)
-        mAwesomeValidation!!.setContext(activity)  // mandatory for UNDERLABEL style
-        mAwesomeValidation!!.addValidation(activity, R.id.url_text, Patterns.WEB_URL, R.string.url)
+        mAwesomeValidation.setContext(activity)  // mandatory for UNDERLABEL style
+        mAwesomeValidation.addValidation(activity, R.id.url_text, Patterns.WEB_URL, R.string.url)
     }
 
 
